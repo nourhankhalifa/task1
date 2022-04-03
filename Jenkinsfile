@@ -8,7 +8,7 @@ pipeline {
             steps {
                 dir("Temp"){
                 git branch: "master",
-                    url: "https://github.com/dockersamples/node-bulletin-board"
+                    url: "https://github.com/nourhankhalifa/bulletin"
                 powershell """
                 cd bulletin-board-app
                 ../.././change.sh
