@@ -11,7 +11,7 @@ pipeline {
                     url: "https://github.com/dockersamples/node-bulletin-board"
                 powershell """
                 cd bulletin-board-app
-                ..\..\.\change.sh
+                ../.././change.sh
                 """
                 }
             }
