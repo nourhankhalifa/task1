@@ -20,18 +20,11 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker', url: "") {
-                        newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", "bulletin-board-app/")
+                        sh "ls"
+                        newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", "bulletin-board-app/Dockerfile")
 //                         newBuild.push()
                     }
                 }
-//                 withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    
-//                     sh """
-//                     cd Temp/bulletin-board-app
-//                     docker build -t \$USERNAME/bulletin-app:1.0.0 .
-//                     docker login -u \$USERNAME -p \$PASSWORD
-//                     """
-//                 }
             }
         }
     }
