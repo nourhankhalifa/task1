@@ -24,7 +24,7 @@ pipeline {
                     sh ""
                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
-                        systemctl start docker
+                        dockerd
                         cd Temp/bulletin-board-app/
                         docker build -t \$USERNAME/bulletin-app:1.0.0 .
                         docker login -u \$USERNAME -p \$PASSWORD
