@@ -21,7 +21,7 @@ pipeline {
                 script{
                     def dockerHome = tool 'docker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
-                    sh "ls -l /var/run/docker.sock"
+                    sh "sudo su"
                     sh "whoami"
                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
