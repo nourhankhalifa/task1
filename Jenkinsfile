@@ -18,12 +18,14 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                def dockerHome = tool 'docker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
-                withDockerRegistry(credentialsId: 'docker', url: "https://index.docker.io/v2/") {
-                    sh "ls"
-                    newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", "bulletin-board-app/Dockerfile")
-//                         newBuild.push()
+                script{
+                    def dockerHome = tool 'docker'
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+                    withDockerRegistry(credentialsId: 'docker', url: "https://index.docker.io/v2/") {
+                        sh "ls"
+                        newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", "bulletin-board-app/Dockerfile")
+    //                         newBuild.push()
+                    }
                 }
             }
         }
