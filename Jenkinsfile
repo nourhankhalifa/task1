@@ -7,7 +7,7 @@ pipeline {
         stage('Run Script') {
             steps {
                 dir("Temp"){
-                git branch: "master",
+                git branch: "main",
                     url: "https://github.com/nourhankhalifa/bulletin"
                 powershell """
                 cd bulletin-board-app
