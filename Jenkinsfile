@@ -1,6 +1,6 @@
 pipeline {
     agent{
-        label "gradle-agent"
+        label "test"
     }
 
     stages {
