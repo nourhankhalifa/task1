@@ -18,9 +18,11 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                withDockerRegistry(credentialsId: 'docker', url: "") {
-                    newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", ".")
-                    newBuild.push()
+                script{
+                    withDockerRegistry(credentialsId: 'docker', url: "") {
+                        newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", ".")
+//                         newBuild.push()
+                    }
                 }
 //                 withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     
