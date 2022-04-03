@@ -21,10 +21,9 @@ pipeline {
                 script{
                     def dockerHome = tool 'docker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
-                    sh ""
+                    sh "docker -v"
                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
-                        service docker start
                         cd Temp/bulletin-board-app/
                         docker build -t \$USERNAME/bulletin-app:1.0.0 .
                         docker login -u \$USERNAME -p \$PASSWORD
