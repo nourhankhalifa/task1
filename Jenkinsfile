@@ -18,14 +18,18 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    docker.build("\$USERNAME/bulletin-app:1.0.0", ".")
-                    sh """
-                    cd Temp/bulletin-board-app
-                    docker build -t \$USERNAME/bulletin-app:1.0.0 .
-                    docker login -u \$USERNAME -p \$PASSWORD
-                    """
+                withDockerRegistry(credentialsId: 'docker', url: "") {
+                    newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", ".")
+                    newBuild.push()
                 }
+//                 withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    
+//                     sh """
+//                     cd Temp/bulletin-board-app
+//                     docker build -t \$USERNAME/bulletin-app:1.0.0 .
+//                     docker login -u \$USERNAME -p \$PASSWORD
+//                     """
+//                 }
             }
         }
     }
