@@ -21,7 +21,7 @@ pipeline {
                 script{
                     def dockerHome = tool 'docker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
-                    sh "sudo su"
+                    sh "docker info"
                     sh "whoami"
                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
