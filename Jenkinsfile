@@ -26,8 +26,8 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         powershell """
                         cd Temp\\bulletin-board-app\\
-                        docker build -t \$USERNAME/bulletin-app:1.0.0 .
-                        docker login -u \$USERNAME -p \$PASSWORD
+                        docker build -t $USERNAME/bulletin-app:1.0.0 .
+                        docker login -u $USERNAME -p $PASSWORD
                         """
                     }
                 }
