@@ -19,7 +19,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script{
-                    withDockerRegistry(credentialsId: 'docker', url: "") {
+                    withDockerRegistry(credentialsId: 'docker', url: "https://hub.docker.com/") {
                         sh "ls"
                         newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", "bulletin-board-app/Dockerfile")
 //                         newBuild.push()
