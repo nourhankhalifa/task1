@@ -16,7 +16,7 @@ pipeline {
                 }
             }
         }
-        stage('Build Image') {
+        stage('Docker: Build Image') {
             steps {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -28,13 +28,20 @@ pipeline {
                 }
             }
         }
-        stage('Push Image') {
+        stage('Docker: Push Image') {
             steps {
             withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     powershell """
                     docker push $USERNAME/bulletin-app:1.0.0
                     """
                 }
+            }
+        }
+        stage('Helm: Deploy'){
+            steps {
+                powershell """
+                helm upgrade --install bulletin-app . -n demo
+                """
             }
         }
     }
