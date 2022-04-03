@@ -30,9 +30,11 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                powershell """
-                docker push $USERNAME/bulletin-app:1.0.0
-                """
+            withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    powershell """
+                    docker push $USERNAME/bulletin-app:1.0.0
+                    """
+                }
             }
         }
     }
