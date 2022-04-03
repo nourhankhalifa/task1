@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Run Script') {
             steps {
-                dir(temp){
+                dir("Temp"){
                 git branch: "master",
                     url: "https://github.com/dockersamples/node-bulletin-board"
                 sh """
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh """
-                    cd bulletin-board-app
+                    cd Temp/bulletin-board-app
                     docker build -t \$USERNAME/bulletin-app:1.0.0 .
                     docker login -u \$USERNAME -p \$PASSWORD
                     """
