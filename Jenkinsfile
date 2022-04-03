@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent{
+        label "gradle-agent"
+    }
 
     stages {
         stage('Run Script') {
@@ -19,10 +21,10 @@ pipeline {
         stage('Build Image') {
             steps {
                 script{
-                    def dockerHome = tool 'docker'
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
-                    sh "docker info"
-                    sh "whoami"
+//                     def dockerHome = tool 'docker'
+//                     env.PATH = "${dockerHome}/bin:${env.PATH}"
+//                     sh "docker info"
+//                     sh "whoami"
                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
                         cd Temp/bulletin-board-app/
