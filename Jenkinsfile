@@ -22,6 +22,7 @@ pipeline {
                     def dockerHome = tool 'docker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
                     sh "ls ${dockerHome}/bin/"
+                    sh "docker build -t nourhankhalifa/bulletin-app:1.0.0 bulletin-board-app/Dockerfile"
                     withDockerRegistry(credentialsId: 'docker', url: "https://index.docker.io/v2/") {
                         sh "ls"
                         newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", "bulletin-board-app/Dockerfile")
