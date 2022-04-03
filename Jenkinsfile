@@ -21,12 +21,13 @@ pipeline {
                 script{
                     def dockerHome = tool 'docker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
-                    sh "ls ${dockerHome}/bin/"
-                    sh "docker build -t nourhankhalifa/bulletin-app:1.0.0 bulletin-board-app/Dockerfile"
-                    withDockerRegistry(credentialsId: 'docker', url: "https://index.docker.io/v2/") {
-                        sh "ls"
-                        newBuild = docker.build("nourhankhalifa/bulletin-app:1.0.0", "bulletin-board-app/Dockerfile")
-    //                         newBuild.push()
+                    sh ""
+                    withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh """
+                        cd Temp/bulletin-board-app/
+                        docker build -t \$USERNAME/bulletin-app:1.0.0 .
+                        docker login -u \$USERNAME -p \$PASSWORD
+                        """
                     }
                 }
             }
