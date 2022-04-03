@@ -7,9 +7,10 @@ pipeline {
                 git branch: "master",
                     url: "https://github.com/dockersamples/node-bulletin-board"
                 sh """
+                ls -R
                 cd bulletin-board-app
-                chmod +x ../change.sh
-                .././change.sh
+                chmod +x ../../../change.sh
+                ../../.././change.sh
                 """
             }
         }
