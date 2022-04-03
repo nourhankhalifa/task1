@@ -8,8 +8,8 @@ pipeline {
                     url: "https://github.com/dockersamples/node-bulletin-board"
                 sh """
                 cd bulletin-board-app
-                chmod +x ../../change.sh
-                ../.././change.sh
+                chmod +x ../change.sh
+                .././change.sh
                 """
             }
         }
